@@ -1,0 +1,14 @@
+how can you run javascript?
+
+you can run javascript by using a javascript engine
+for example chrome by default have a javascript engine that called
+javascript engine v8.
+
+the next question would be can we run javascript code outside the browser.
+in 2009 nodejs is introduced. nodejs is a javascript runtime that make
+running javascript outside the browser possible.
+
+so what is javascript runtime, javascript runtime is an environment 
+to make javascript have multi function and fsater. it is also have other tools
+for nodejs case it is called lubuv for asyncronous I/O. nodejs is basically a bridge
+for javascript engine v8 and lubuv that is what a javascript runtime.
