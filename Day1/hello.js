@@ -1,5 +1,5 @@
 
-const mission = process.argv[1];
+const mission = process.argv[2];
 
 
 if (mission === 'belajar') {
