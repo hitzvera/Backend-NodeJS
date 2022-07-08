@@ -8,3 +8,8 @@ libuv juga memiliki hal yang sama namun menggunakan pendekatan
 asyncronous. dengan begitu ketika Javascript API dipanggil
 fungsi tersebut nge binding kepada fungsi yang ada di libuv
 agar dapat dijalankan secara async
+
+// javascript is single thread operation and syncronous programming
+language, but how does node js run asyncronously basically
+nodejs binding into libuv that run asyncronously in the main thread
+using eventloop (responsible for all callback function)
