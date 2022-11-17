@@ -24,7 +24,17 @@ const server = http.createServer((req, res) => {
     const items = req.url.split('/')
 
     
-    if(items[1] === 'myself'){
+    if(req.method === 'POST' && items[1] === 'myself'){
+
+        req.on('data', (data) => {
+            const friend = data.toString()
+            console.log(`Request: ${friend}`)
+            friends.push(JSON.parse(friend))
+            
+        })
+        req.pipe(res)
+    } else if(req.method === 'GET' && items[1] === 'myself') {
+
         res.statusCode = 200
         res.setHeader('Content-Type', 'application/json')
         if(items.length === 3){
@@ -32,6 +42,7 @@ const server = http.createServer((req, res) => {
             res.end(JSON.stringify(friends[friendIndex]))
         }
         res.end(JSON.stringify(friends))
+        
     } else if(items[1] === 'friends'){
         res.setHeader('Content-Type', 'text/html')
         res.write('<html>')
