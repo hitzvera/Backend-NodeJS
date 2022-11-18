@@ -1,30 +1,34 @@
 const express = require('express')
 const app = express()
+const path = require('path')
 
-const messageController = require('./controllers/messages.controller')
-const friendController = require('./controllers/friends.controller')
+
+const friendsRouter = require('./routes/friends.router')
+const messagesRouter = require('./routes/messages.router')
 
 const PORT = 3000
+app.set('view engine', 'hbs')
+app.set('views', path.join(__dirname, 'views'))
 
-app.listen(PORT, ()=>{
-    console.log(`server running at ${PORT}`)
-})
 app.use((req,res,next) => {
     const start = Date.now()
     next()
     const delta = Date.now() - start
-    console.log(`${req.method} ${req.url} ${delta}ms`)
+    console.log(`${req.method} ${req.baseUrl}${req.url} ${delta}ms`)
 })
+app.use('/site', express.static(path.join(__dirname, 'public')))
 app.use(express.json())
 
-const friendsRouter = express.Router()
-const messageRouter = express.Router()
+app.get('/', (req, res) => {
+    res.render('index', {
+        title: 'my friend is good',
+        caption: 'france is good'
+    })
+})
 
-friendsRouter.post('/', friendController.postFriend)
-friendsRouter.get('/', friendController.getFriends)
-friendsRouter.get('/:friendId', friendController.getFriend)
 app.use('/friends', friendsRouter)
+app.use('/messages', messagesRouter)
 
-messageRouter.get('/', messageController.getMessages)
-messageRouter.post('/', messageController.postMessage)
-app.use('/messages', messageRouter)
+app.listen(PORT, ()=>{
+    console.log(`server running at ${PORT}`)
+})

@@ -1,9 +1,15 @@
+const model = require('../models/friends.model')
+const path = require('path')
+
 function getMessages(req, res) {
-    res.send('<ul><li>mujahidansori</li><ul>')
+    res.sendFile(path.join(__dirname, '..', 'public', 'skimountain.jpg'))
 }
 
 function postMessage(req, res) {
-    res.send({name: "Mujahid ansori majid", age: 20})
+    res.send({
+        name: req.body.name,
+        id: model.length
+    })
 }
 
 module.exports = {
